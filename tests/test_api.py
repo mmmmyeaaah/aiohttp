@@ -42,7 +42,7 @@ def test_create_user_without_email():
 
 
 def test_patch_user(create_user):
-    response = requests.patch(f'{API_URL}/users/{create_user["id"]}', json={'email': 'new_email', 'password': '12345'})
+    response = requests.patch(f'{API_URL}/users/{create_user["id"]}', json={'email': 'new_email'})
     assert response.status_code == 200
     assert response.json()['email'] == 'new_email'
 
@@ -84,10 +84,10 @@ def test_create_advertisement(create_user):
 def test_patch_advertisement(create_advertisement):
     response = requests.patch(f'{API_URL}/adv/{create_advertisement["id"]}',
                               auth=(create_advertisement['user_email'], '1234'),
-                              json={'description': 'mmmmmmmm', 'title': 'tomato'})
+                              json={'description': 'mmm'})
     assert response.status_code == 200
     json_data = response.json()
-    assert json_data['description'] == 'mmmmmmmm'
+    assert json_data['description'] == 'mmm'
 
 
 def test_delete_advertisement(create_advertisement):
